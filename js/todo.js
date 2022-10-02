@@ -1,7 +1,7 @@
 const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("#todo-form input");
 const toDoList = document.getElementById("todo-list");
-const TODOS_KEY = "todos"
+const TODOS_KEY = "todos";
 
 
 let toDos = [];
@@ -18,44 +18,45 @@ JSON.stringify함수를 활용하여 toDos를 String으로 저장
 function deleteToDo(event) {
     const li = event.target.parentElement;
     li.remove();
-
-}
-
-
-function paintToDo(newToDo) {
+    toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+    saveToDos();
+  }
+  
+  function paintToDo(newTodo) {
     const li = document.createElement("li");
     li.id = newTodo.id;
     const span = document.createElement("span");
-    li.appendChild(span);
-    span.innerText = newToDo.Text;
+    span.innerText = newTodo.text;
     const button = document.createElement("button");
     button.innerText = "❌";
     button.addEventListener("click", deleteToDo);
+    li.appendChild(span);
     li.appendChild(button);
     toDoList.appendChild(li);
-
-}
-
-
-function hadleToDoSubmit(event){
+  }
+  
+  function handleToDoSubmit(event) {
     event.preventDefault();
-    const newToDo = toDoInput.value;
+    const newTodo = toDoInput.value;
     toDoInput.value = "";
     const newTodoObj = {
-        text:newTodo,
-        id: Date.now(),
-    }
-    toDos.push(newToDoObj);
-    paintToDo(newToDo);
+      text: newTodo,
+      id: Date.now(),
+    };
+    toDos.push(newTodoObj);
+    paintToDo(newTodoObj);
     saveToDos();
-}
-
-toDoForm.addEventListener("submit",hadleToDoSubmit);
-
-const savedToDos = localStorage.getItem(TODOS_KEY);
-
-if(savedToDos !== Null){
+  }
+  
+  toDoForm.addEventListener("submit", handleToDoSubmit);
+  
+  const savedToDos = localStorage.getItem(TODOS_KEY);
+  
+  if (savedToDos !== null) {
     const parsedToDos = JSON.parse(savedToDos);
-    toDos = parsedToDos
+    toDos = parsedToDos;
     parsedToDos.forEach(paintToDo);
-}
+  }
+
+  function sexyFilter(){return item !== 3 }
+
