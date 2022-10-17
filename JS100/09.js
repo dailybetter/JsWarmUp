@@ -13,3 +13,6 @@ var result = `'${year}/${month}/${day} ${hour}:${minute}:${second}'`
 var result = year.concat('/', month, '/', day, ' ', hour, ':', minute, ':', second);
 
 console.log(result)
+
+// concat() 매서드를 사용하여 문제를 풀 수도 있지만 위에 서술한 대로 backtick 한국어로는 억음부호?
+// 무튼 백틱을 활용한 출력방법을 통해서도 문제를 해결할 수 있으니 알아두쟈!
